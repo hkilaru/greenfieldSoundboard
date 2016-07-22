@@ -7,7 +7,7 @@ mongoose.connect('mongodb://needsclosure:needsclosure1@ds027175.mlab.com:27175/s
 var conn = mongoose.connection;
 Grid.mongo = mongoose.mongo;
 
-
+/* TO ADD SOUND TO DATABASE
 conn.once('open', function () {
     console.log('open');
     var gfs = Grid(conn.db);
@@ -24,8 +24,23 @@ conn.once('open', function () {
         console.log(file.filename + 'Written To remote DB!!');
     });
 
-});
+}); */
 
+/*TO RETRIEVE SOUND FROM DATABASE
+conn.once('open', function(){
+    console.log('open');
+    var gfs = Grid(conn.db);
+    var fs_write_stream = fs.createWriteStream('comeThru');
+
+//read from mongodb
+var readstream = gfs.createReadStream({
+     filename: 'sound files'
+});
+readstream.pipe(fs_write_stream);
+fs_write_stream.on('close', function () {
+     console.log('COME THRU!!!!');
+   })
+ }) */
 
 var keyboardSchema = new Schema({
   name: String,
