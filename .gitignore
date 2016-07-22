@@ -38,6 +38,3 @@ jspm_packages
 
 # Weird apple stuff
 .DS_store
-
-# Uploads
-uploads
