@@ -12,6 +12,7 @@ var rootPath = path.normalize(__dirname + '/../public');
 // note that the script tags in index.html are simplified as a result.
 app.use('/dist', express.static(__dirname + '/../dist/'));
 app.use('/soundfiles', express.static(__dirname + '/../foley/'));
+app.use('/downloads', express.static(__dirname + '/../downloads/'));
 app.use('/node_modules', express.static(__dirname + '/../node_modules/'));
 app.use('/compiled', express.static(__dirname + '/../compiled/'));
 app.use('/styles', express.static(__dirname + '/../public/components/styles/'));

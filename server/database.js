@@ -7,40 +7,43 @@ mongoose.connect('mongodb://needsclosure:needsclosure1@ds027175.mlab.com:27175/s
 var conn = mongoose.connection;
 Grid.mongo = mongoose.mongo;
 
-/* TO ADD SOUND TO DATABASE
-conn.once('open', function () {
-    console.log('open');
-    var gfs = Grid(conn.db);
-    console.log('OPEN!')
-    // streaming to gridfs
-    //filename to store in mongodb
-    var writestream = gfs.createWriteStream({
-        filename: 'sound files'
-    });
-    fs.createReadStream('./uploads/412d6e3f5e8bad66d8d4ac0220c09660').pipe(writestream);
+// TO ADD SOUND TO DATABASE
+var saveToDB = function(name) {
+  conn.once('open', function () {
+      console.log('open');
+      var gfs = Grid(conn.db);
+      console.log('OPEN!')
+      // streaming to gridfs
+      //filename to store in mongodb
+      var writestream = gfs.createWriteStream({
+          filename: name
+      });
+      fs.createReadStream('./uploads/412d6e3f5e8bad66d8d4ac0220c09660').pipe(writestream);
+      writestream.on('close', function (file) {
+          // do something with `file`
+          console.log(file.filename + 'Written To remote DB!!');
+      });
+  });
+}
 
-    writestream.on('close', function (file) {
-        // do something with `file`
-        console.log(file.filename + 'Written To remote DB!!');
-    });
+//TO RETRIEVE SOUND FROM DATABASE
+var retrieveSound = function(name) {
+  conn.once('open', function(){
+      console.log('open');
+      var gfs = Grid(conn.db);
+      var fs_write_stream = fs.createWriteStream('./downloads/'+ name);
 
-}); */
-
-/*TO RETRIEVE SOUND FROM DATABASE
-conn.once('open', function(){
-    console.log('open');
-    var gfs = Grid(conn.db);
-    var fs_write_stream = fs.createWriteStream('comeThru');
-
-//read from mongodb
-var readstream = gfs.createReadStream({
-     filename: 'sound files'
-});
-readstream.pipe(fs_write_stream);
-fs_write_stream.on('close', function () {
-     console.log('COME THRU!!!!');
+  //read from mongodb
+  var readstream = gfs.createReadStream({
+       filename: 'sound files'
+  });
+  readstream.pipe(fs_write_stream);
+  fs_write_stream.on('close', function () {
+       console.log('sound downloaded');
+     })
    })
- }) */
+}
+
 
 var keyboardSchema = new Schema({
   name: String,
