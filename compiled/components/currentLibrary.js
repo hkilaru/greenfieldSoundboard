@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24,12 +24,12 @@ var CurrentLibrary = function (_React$Component) {
   }
 
   _createClass(CurrentLibrary, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       this.getLibrary();
     }
   }, {
-    key: "getLibrary",
+    key: 'getLibrary',
     value: function getLibrary() {
       $.get('/soundLibrary', function (sounds) {
         this.setState({
@@ -38,58 +38,32 @@ var CurrentLibrary = function (_React$Component) {
       }.bind(this));
     }
   }, {
-    key: "bindKey",
-    value: function bindKey(idx) {
-      console.log("bindKey called");
-      console.log("index of song", idx);
-      var name = this.state.library[idx].name;
-      if (this.state.library[idx].uploaded) {
-        console.log("song was uploaded...");
-        $.ajax({
-          method: "POST",
-          headers: {
-            'Content-Type': 'json'
-          },
-          data: {
-            "name": name
-          }
-        }).done(function () {
-          console.log("song downloaded");
-        }).fail(function (err) {
-          console.log("song not downloaded", err);
-        });
-      } else {
-        console.log("song was not uplaoded");
-        //bind key to link
-      }
-    }
-  }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-          "h1",
+          'h1',
           null,
-          " CURRENT LIBRARY "
+          ' CURRENT LIBRARY '
         ),
         React.createElement(
-          "ul",
+          'ul',
           null,
           this.state.library.map(function (sound, index) {
             return React.createElement(
-              "li",
+              'li',
               { key: index },
-              " Name: ",
+              ' Name: ',
               sound.name,
-              " Link: ",
+              ' Link: ',
               sound.soundLink,
-              " ",
+              ' ',
               React.createElement(
-                "button",
+                'button',
                 { onClick: this.bindKey(index) },
-                " Bind Key "
+                ' Bind Key '
               )
             );
           })

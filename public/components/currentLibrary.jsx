@@ -19,32 +19,6 @@ class CurrentLibrary extends React.Component{
    }.bind(this));
  }
 
-  bindKey(idx) {
-    console.log("bindKey called");
-    console.log("index of song", idx);
-    var name = this.state.library[idx].name;
-    if(this.state.library[idx].uploaded){
-      console.log("song was uploaded...")
-      $.ajax({
-        method: "POST",
-        headers: {
-          'Content-Type': 'json'
-        },
-        data: {
-          "name": name
-        }
-      }).done(function(){
-        console.log("song downloaded")
-      })
-      .fail(function(err){
-        console.log("song not downloaded", err);
-      })
-    }
-    else{
-      console.log("song was not uplaoded");
-      //bind key to link
-    }
-  }
 
   render(){
     return(
