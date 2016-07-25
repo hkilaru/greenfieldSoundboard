@@ -84,8 +84,7 @@ var RebindNode = React.createClass({
         "p",
         { className: "rebindSong", onClick: this.props.reRender },
         this.props.targetSong.name
-      ),
-      React.createElement("img", { className: "rebindIcon", src: "assets/listen.png", onClick: this.playSample })
+      )
     );
   }
 });

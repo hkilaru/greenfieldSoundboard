@@ -107,7 +107,9 @@ var App = React.createClass({
   //Hides and shows the rebinding menu using jQuery.
   handleCtrlKey: function handleCtrlKey() {
     $('#bindingWindow').animate({ height: 'toggle' }, 350);
-    $('#keyboardWindow').animate({ width: 'toggle' }, 350);
+
+    //  $('#bindingWindow').css("height", "200px");
+    // $('#keyboardWindow').animate({width:'toggle'},350);
   },
 
   //Sets the specified audio element to loop, then plays/pauses and styles as appropriate.
@@ -128,7 +130,7 @@ var App = React.createClass({
   //useful helper for re-rendering DOM when a new binding is assigned.
   reRender: function reRender() {
     $('#bindingWindow').animate({ height: 'toggle' }, 350);
-    $('#keyboardWindow').animate({ width: 'toggle' }, 350);
+    //  $('#keyboardWindow').animate({width:'toggle'},350);
     ReactDOM.render(React.createElement(
       'div',
       null,
@@ -142,6 +144,15 @@ var App = React.createClass({
     return React.createElement(
       'div',
       { id: 'appWindow' },
+      React.createElement(
+        'div',
+        { id: 'keyboardWindow', className: 'keyboard' },
+        this.state.bindings.map(function (keyBinding, idx) {
+          return (//yay es6
+            keyBinding === 0 ? React.createElement('br', { key: idx }) : React.createElement(VKey, { key: idx, keyId: keyBinding.key, path: keyBinding.path })
+          );
+        })
+      ),
       React.createElement(
         'div',
         { id: 'bindingWindow' },
@@ -161,28 +172,13 @@ var App = React.createClass({
             );
           }, this)
         )
-      ),
-      React.createElement(
-        'div',
-        { id: 'keyboardWindow', className: 'keyboard' },
-        this.state.bindings.map(function (keyBinding, idx) {
-          return (//yay es6
-            keyBinding === 0 ? React.createElement('br', { key: idx }) : React.createElement(VKey, { key: idx, keyId: keyBinding.key, path: keyBinding.path })
-          );
-        })
       )
     );
   }
 });
 
-// This simulates a loading page. In all of our tests the server loaded the sound
-// files instantly but by the time we noticed this we already had an awesome
-// loading page up and running. This timeout feature honors that hard work
-setTimeout(function () {
-  document.getElementById('secretSound').pause();
-  ReactDOM.render(React.createElement(
-    'div',
-    null,
-    React.createElement(App, null)
-  ), document.getElementById('app'));
-}, 2000);
+ReactDOM.render(React.createElement(
+  'div',
+  null,
+  React.createElement(App, null)
+), document.getElementById('app'));

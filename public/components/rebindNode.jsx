@@ -81,7 +81,6 @@ var RebindNode = React.createClass({
     return (
       <div className="rebindNode" onClick = {this.updateKeyBinding}>
         <p className="rebindSong" onClick = {this.props.reRender}>{this.props.targetSong.name}</p>
-        <img className="rebindIcon" src="assets/listen.png" onClick={this.playSample}/>
       </div>
     )
   }
