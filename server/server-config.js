@@ -68,7 +68,6 @@ app.post('/soundUpload', upload.single('sound'), function(req, res, next){
 });
 
 app.post('/soundDownload', function(req, res, next){
-  console.log("request received at soundDownload");
   db.retrieveSound(req.body.name, next);
 })
 
